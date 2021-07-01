@@ -1,6 +1,6 @@
 (import 
-  (chibi)
-  (Scripts EventTypes))
+  (chibi))
+ ; (Scripts EventTypes))
 
 (define (test-func)
   (%Custom-Print "hello"))
@@ -16,7 +16,7 @@
   (displayln "callback"))
 
 (define (init event_manager)
-  (Register-Callback event_manager Collision-Event callback1))
+  (Register-Callback event_manager 21 callback1))
 
 (define (draw)
   (displayln "drawing"))

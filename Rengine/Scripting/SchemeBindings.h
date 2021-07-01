@@ -1,10 +1,29 @@
 #pragma once
 //todo replace with forward delc
-#include <chibi/eval.h>
+#include <janet.h>
+#include <iostream>
 
 namespace Ren {
-	sexp custom_print(sexp ctx, sexp self, sexp_sint_t n, sexp arg1);
+	static Janet custom_print(int32_t argc, Janet* argv) {
+		// Throw error in janet if more than one arg passed
+		janet_fixarity(argc, 1);
+		auto string = janet_getstring(argv, 0);
+			   
+		std::cout << string << std::endl;
 
-	const unsigned int register_callback_argc = 3;
-	sexp register_callback(sexp ctx, sexp self, sexp_sint_t n, sexp arg1, sexp arg2, sexp arg3);
+		return janet_wrap_nil();
+	}
+
+	static const JanetReg cfuns[] = {
+		{
+			"custom_print", custom_print, "testing c bindings"
+		},
+		{
+			NULL, NULL, NULL
+		}
+	};
+
+	//sexp custom_print(sexp ctx, sexp self, sexp_sint_t n, sexp arg1);
+	//const unsigned int register_callback_argc = 3;
+	//sexp register_callback(sexp ctx, sexp self, sexp_sint_t n, sexp event_manager, sexp event_type, sexp callback_proc);
 }

@@ -5,6 +5,7 @@
 #include "Scripting/SchemeBindings.h"
 #include "Events/EventManager.h"
 
+
 const int screen_width = 600, screen_height = 600;
 
 
@@ -16,18 +17,19 @@ int main(int argc, char* args[])
     (void)args;
 
     auto scripting_engine = Ren::ScriptEngine();
+    scripting_engine.bind_funcs("Ren", Ren::cfuns);
+    //scripting_engine.get_func("Custom-Print");
     scripting_engine.load_script();
-    scripting_engine.bind_func("%Custom-Print", 1, Ren::custom_print);
-    scripting_engine.call_update_routine(64.0f);
-    scripting_engine.call_draw_routine();
+    //scripting_engine.call_update_routine(64.0f);
+    //scripting_engine.call_draw_routine();
 
-    Ren::EventManager event_man;
+    //Ren::EventManager event_man;
 
-    sexp eventmanager_type = scripting_engine.register_c_type("EventManager", sizeof(Ren::EventManager));
-    sexp event_man_sexp = scripting_engine.make_cpointer(eventmanager_type, &event_man);
+    //sexp eventmanager_type = scripting_engine.register_c_type("EventManager", sizeof(Ren::EventManager));
+    //sexp event_man_sexp = scripting_engine.make_cpointer(eventmanager_type, &event_man);
 
-    scripting_engine.bind_func("Register-Callback", Ren::register_callback_argc, Ren::register_callback);
-    scripting_engine.call_init_routine(event_man_sexp);
+    //scripting_engine.bind_func("Register-Callback", Ren::register_callback_argc, Ren::register_callback);
+    //scripting_engine.call_init_routine(event_man_sexp);
     //scripting_engine.call_sexp("init", { event_man_sexp });
 
 

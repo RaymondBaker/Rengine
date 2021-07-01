@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Events">
       <UniqueIdentifier>{375cbb8e-c171-43ae-bff4-c14d2ed248c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{e4ed90a2-7949-46b5-aa64-afb27bb118f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Rengine.cpp">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="Events\EventManager.h">
       <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\file.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
