@@ -6,6 +6,14 @@
 
 (Ren/custom_print "lol")
 
+(def map "tes")
+
+(print "calling c func")
+(Script-Eng/Print-Bound-Functions script_eng)
+
+(defn ccall [] 
+	(print 'hello))
+
 #(import 
 #  (chibi))
 # ; (Scripts EventTypes))

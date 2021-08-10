@@ -156,7 +156,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Events\EventHandler.cpp" />
+    <ClCompile Include="Events\Event.cpp" />
     <ClCompile Include="Events\EventManager.cpp" />
+    <ClCompile Include="Scene\Node.cpp" />
     <ClCompile Include="Rendering\Renderer.cpp" />
     <ClCompile Include="Rendering\SpriteBatch.cpp" />
     <ClCompile Include="Rengine.cpp" />
@@ -164,7 +167,10 @@
     <ClCompile Include="Scripting\ScriptEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Events\EventHandler.h" />
+    <ClInclude Include="Events\Event.h" />
     <ClInclude Include="Events\EventManager.h" />
+    <ClInclude Include="Scene\Node.h" />
     <ClInclude Include="Rendering\Renderer.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
     <ClInclude Include="Scripting\SchemeBindings.h" />

@@ -1,55 +1,56 @@
 #pragma once
 #include <vector>
 #include <janet.h>
+#include <iostream>
 #include <filesystem>
 
 namespace Ren
 {
 	namespace fs = std::filesystem;
 
+	// ONLY ONE PER THREAD
 	class ScriptEngine {
 	public:
 		ScriptEngine();
 		~ScriptEngine();
 		void load_script(const fs::path& file_path = "Scripts/main.janet");
+		void bind_funcs(const std::string& func_prefix, const JanetReg* cfuns);
+		void register_pointer(const std::string& name, void* c_pointer, const std::string& doc_string = "TODO make doc string");
 
-
-		void bind_funcs(const char* func_prefix, const JanetReg* cfuns)
-		{
-			//if you use janet_cfuns without prefix it takes a prefix param and does nothing with it
-			janet_cfuns_prefix(m_env, func_prefix, cfuns);
+		void print_bound_funcs() {
+			std::cout << "Available C funcs:" << '\n';
+			std::cout << "-----------------------------------------------------------" << '\n';
+			for (auto i : m_bound_funcs) {
+				std::cout << i << '\n';
+			}
+			std::cout << "-----------------------------------------------------------" << '\n';
 		}
 
-		Janet get_func(const char* func_name) {
-			auto j_func_name = janet_wrap_string(func_name);
-			auto func = janet_table_get(m_env, j_func_name);
-			return func;
+		static Janet j_print_bound_funcs(int32_t argc, Janet* argv) {
+			// Throw error in janet if more than one arg passed
+			janet_fixarity(argc, 1);
+
+			//TODO test if this segfaults when something other than scriptengine is sent to it
+				// ALSO dynamic cast might be better here if static doesn't throw
+			auto script_eng = static_cast<ScriptEngine*>(janet_getpointer(argv, 0));
+			script_eng->print_bound_funcs();
+			return janet_wrap_nil();
 		}
-
-		Janet call_func(const char* func_name) {
-			auto j_func = janet_unwrap_function(get_func(func_name));
-			Janet out;
-			janet_pcall(j_func, 0, NULL, &out, NULL);
-		}
-
-		//void call_update_routine(float delta_time);
-		//void call_init_routine(sexp event_manager);
-		//void call_draw_routine();
-
-		//void call_sexp(const char* proc_name, std::initializer_list<sexp> args);
-		//void call_sexp(sexp proc, std::initializer_list<sexp> args);
-
-		//sexp register_c_type(const char* name, unsigned int len);
-		//sexp make_cpointer(sexp type_id, void* object);
 
 	private:
-		//bool check_for_errors(sexp res);
+
+		std::vector<std::string> m_bound_funcs;
 
 		JanetTable* m_env;
 
-		//sexp m_ctx;
-		//sexp m_env;
-		//sexp m_std_err;
+		static constexpr JanetReg cfuns[] = {
+			{
+				"Print-Bound-Functions", j_print_bound_funcs, "Print functions bound to c++ funcs"
+			},
+			{
+				NULL, NULL, NULL
+			}
+		};
 	protected:
 	};
 }

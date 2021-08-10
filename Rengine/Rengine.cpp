@@ -4,6 +4,7 @@
 #include "Scripting/ScriptEngine.h"
 #include "Scripting/SchemeBindings.h"
 #include "Events/EventManager.h"
+#include "Scene/Node.h"
 
 
 const int screen_width = 600, screen_height = 600;
@@ -18,8 +19,10 @@ int main(int argc, char* args[])
 
     auto scripting_engine = Ren::ScriptEngine();
     scripting_engine.bind_funcs("Ren", Ren::cfuns);
-    //scripting_engine.get_func("Custom-Print");
+    scripting_engine.print_bound_funcs();
+
     scripting_engine.load_script();
+    //scripting_engine.call_func("ccall");
     //scripting_engine.call_update_routine(64.0f);
     //scripting_engine.call_draw_routine();
 
@@ -60,6 +63,18 @@ int main(int argc, char* args[])
 
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    Ren::EventManager event_man(&scripting_engine);
+    Ren::Node node(event_man);
+    Ren::Node node2(event_man);
+    
+    event_man.push_event(Ren::Event(Ren::EventType::Collision));
+    event_man.push_event(Ren::Event(Ren::EventType::Collision));
+    event_man.push_event(Ren::Event(Ren::EventType::Collision));
+    event_man.push_event(Ren::Event(Ren::EventType::Collision));
+    event_man.handle_events();
+
+    std::cout << "Raymond!!" << std::endl;
 
 	// Event loop
 	while (!quit)
