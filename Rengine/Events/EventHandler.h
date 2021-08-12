@@ -9,16 +9,14 @@ namespace Ren {
 	class EventHandler
 	{
 	public:
-		EventHandler(EventType event_type, std::function<void (Event &e)> callback) {
+		EventHandler(EventType event_type, std::function<void (std::unique_ptr<Event> const &e)> callback) {
 			// TODO handle overflow or atleast error out if you do
 			m_id = next_id++;
 			m_event_type = event_type;
 			m_callback = callback;
 		}
-		inline void handle(Event& e) {
-			if (e.type == m_event_type) {
-				//TODO: use dynamic_cast on debug and static_cast on release
-				//;
+		inline void handle(std::unique_ptr<Event> const &e) {
+			if (e->type == m_event_type) {
 				m_callback(e);
 			}
 		}
@@ -29,7 +27,7 @@ namespace Ren {
 		static uint64_t next_id;
 		uint64_t m_id;
 
-		std::function<void (Event &e)> m_callback;
+		std::function<void (std::unique_ptr<Event> const &e)> m_callback;
 		EventType m_event_type;
 	};
 }

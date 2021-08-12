@@ -13,8 +13,11 @@ namespace Ren {
 			m_script_eng = script_eng;
 		}
 
-		void push_event(Event&& e) {
-			m_event_queue.push(e);
+		// Returns true when quit event is found
+		bool push_sdl_events();
+
+		void push_event(std::unique_ptr<Event> e) {
+			m_event_queue.push(std::move(e));
 		}
 
 		void handle_events() {
@@ -39,7 +42,7 @@ namespace Ren {
 		}
 	private:
 		ScriptEngine *m_script_eng;
-		std::queue<Event> m_event_queue;
+		std::queue<std::unique_ptr<Event>> m_event_queue;
 		std::vector<EventHandler> m_event_handlers;
 	protected:
 	};

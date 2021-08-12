@@ -68,28 +68,16 @@ int main(int argc, char* args[])
     Ren::Node node(event_man);
     Ren::Node node2(event_man);
     
-    event_man.push_event(Ren::Event(Ren::EventType::Collision));
-    event_man.push_event(Ren::Event(Ren::EventType::Collision));
-    event_man.push_event(Ren::Event(Ren::EventType::Collision));
-    event_man.push_event(Ren::Event(Ren::EventType::Collision));
+    event_man.push_event(std::make_unique<Ren::CollisionEvent>());
+    //event_man.push_event(std::make_unique<Ren::Event>(Ren::EventType::Collision));
     event_man.handle_events();
-
-    std::cout << "Raymond!!" << std::endl;
 
 	// Event loop
 	while (!quit)
 	{
-		SDL_Event e;
+        quit = event_man.push_sdl_events();
 
-		// Wait indefinitely for the next available event
-		SDL_WaitEvent(&e);
-
-		// User requests quit
-		if (e.type == SDL_QUIT)
-		{
-			quit = true;
-		}
-
+        event_man.handle_events();
 
 		// Clear screen
 		SDL_RenderClear(renderer);
