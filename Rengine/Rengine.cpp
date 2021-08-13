@@ -67,9 +67,8 @@ int main(int argc, char* args[])
     Ren::EventManager event_man(&scripting_engine);
     Ren::Node node(event_man);
     Ren::Node node2(event_man);
-    
-    event_man.push_event(std::make_unique<Ren::CollisionEvent>());
-    //event_man.push_event(std::make_unique<Ren::Event>(Ren::EventType::Collision));
+
+    event_man.push_event(std::make_unique<Ren::CollisionEvent>(12, 45));
     event_man.handle_events();
 
 	// Event loop

@@ -1,6 +1,6 @@
 #include "EventManager.h"
 #include <SDL.h>
-#include "KeyDownEvent.h"
+#include "KeyEvent.h"
 
 namespace Ren {
 	bool EventManager::push_sdl_events() {
@@ -11,7 +11,10 @@ namespace Ren {
 				return true;
 				break;
 			case SDL_KEYDOWN:
-				push_event(std::make_unique<KeyDownEvent>(e.key.keysym.sym));
+				push_event(std::make_unique<KeyEvent>(e.key.keysym.sym, KeyEventType::KeyDown));
+				break;
+			case SDL_KEYUP:
+				push_event(std::make_unique<KeyEvent>(e.key.keysym.sym, KeyEventType::KeyUp));
 				break;
 			}
 		}

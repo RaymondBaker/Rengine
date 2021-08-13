@@ -95,7 +95,7 @@
     <ClInclude Include="Events\CollisionEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Events\KeyDownEvent.h">
+    <ClInclude Include="Events\KeyEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace Ren {
 		Collision,
 		UserInput,
 		GameQuit,
-		KeyDown
+		KeyEvent
 	};
 
 	class Event

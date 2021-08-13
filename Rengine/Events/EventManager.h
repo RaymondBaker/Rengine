@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <queue>
+#include <list>
 #include "Event.h"
 #include "../Scripting/ScriptEngine.h"
 #include "EventHandler.h"
@@ -33,17 +34,21 @@ namespace Ren {
 
 
 		//TODO find way to consolidate these
-		uint64_t add_handler(EventHandler &handler) {
+		std::list<EventHandler>::iterator add_handler(EventHandler &handler) {
 			m_event_handlers.push_back(handler);
-			return handler.get_id();
+			return --m_event_handlers.end();
 		}
-		uint64_t add_handler(EventHandler&& handler) {
+		std::list<EventHandler>::iterator add_handler(EventHandler&& handler) {
 			return add_handler(handler);
+		}
+		void delete_handler(std::list<EventHandler>::iterator &handler_it) {
+			m_event_handlers.erase(handler_it);
 		}
 	private:
 		ScriptEngine *m_script_eng;
 		std::queue<std::unique_ptr<Event>> m_event_queue;
-		std::vector<EventHandler> m_event_handlers;
+		//TODO use double linked list and have node keep a reference to the actual location for deletion
+		std::list<EventHandler> m_event_handlers;
 	protected:
 	};
 }

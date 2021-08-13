@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <filesystem>
+#include <sstream>
 
 
 namespace Ren
@@ -10,12 +11,9 @@ namespace Ren
 	static std::string read_file(const fs::path& file_path) {
 		std::ifstream t(file_path.c_str());
 
-		t.seekg(0, std::ios::end);
-		size_t size = t.tellg();
-		std::string buffer(size, ' ');
-		t.seekg(0);
-		t.read(&buffer[0], size); 
+		std::stringstream buffer;
+		buffer << t.rdbuf();
 
-		return buffer;
+		return buffer.str();
 	}
 }

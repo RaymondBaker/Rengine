@@ -8,14 +8,12 @@ namespace Ren {
 	class CollisionEvent : public Event
 	{
 	public:
-		CollisionEvent() : Event (EventType::Collision) {
-			i = 6969;
-			g = 0;
+		CollisionEvent(const uint64_t obj1_id, const uint64_t obj2_id) 
+			: Event (EventType::Collision), obj1_id (obj1_id), obj2_id (obj2_id) {
 		}
 		std::string to_string() const override {
 			return "CollisionEvent";
 		}
-		int i;
-		int g;
+		const uint64_t obj1_id, obj2_id;
 	};
 }

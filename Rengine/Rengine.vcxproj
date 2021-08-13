@@ -171,7 +171,7 @@
     <ClInclude Include="Events\EventHandler.h" />
     <ClInclude Include="Events\Event.h" />
     <ClInclude Include="Events\EventManager.h" />
-    <ClInclude Include="Events\KeyDownEvent.h" />
+    <ClInclude Include="Events\KeyEvent.h" />
     <ClInclude Include="Scene\Node.h" />
     <ClInclude Include="Rendering\Renderer.h" />
     <ClInclude Include="Rendering\SpriteBatch.h" />
