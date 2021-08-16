@@ -6,16 +6,25 @@
 #include "Events/EventManager.h"
 #include "Scene/Node.h"
 
+#include <sol/sol.hpp>
+
 
 const int screen_width = 600, screen_height = 600;
 
 
 
-
+// Find a way to get console bakc
 int main(int argc, char* args[])
 {
     (void)argc;
     (void)args;
+
+    sol::state lua;
+	// open some common libraries
+	lua.open_libraries(sol::lib::base, sol::lib::package);
+	lua.script("print('bark bark bark! yeehaw')");
+
+	std::cout << std::endl;
 
     auto scripting_engine = Ren::ScriptEngine();
     //scripting_engine.bind_funcs("Ren", Ren::cfuns);

@@ -10,8 +10,8 @@ namespace Ren
 	// ONLY ONE PER THREAD
 	class ScriptEngine {
 	public:
-		ScriptEngine();
-		~ScriptEngine();
+		ScriptEngine() {}
+		~ScriptEngine() {}
 	/*
 		void load_script(const fs::path& file_path = "Scripts/main.janet");
 		void bind_funcs(const std::string& func_prefix, const JanetReg* cfuns);

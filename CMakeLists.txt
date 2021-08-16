@@ -16,11 +16,11 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/ThePhD/sol2.git
   GIT_TAG        v3.2.2
 )
-#FetchContent_Declare(
-#  lua_static
-#  GIT_REPOSITORY https://github.com/walterschell/Lua.git
-#  GIT_TAG        v5.4.2
-#)
+FetchContent_Declare(
+  lua_static
+  GIT_REPOSITORY https://github.com/walterschell/Lua.git
+  GIT_TAG        v5.4.2
+)
 
 FetchContent_Declare(
   glm
@@ -28,7 +28,7 @@ FetchContent_Declare(
   GIT_TAG        0.9.9.8
 )
 
-FetchContent_MakeAvailable(SDL2 sol2 glm)
+FetchContent_MakeAvailable(SDL2 sol2 glm lua_static)
 
 
 add_subdirectory(Rengine)

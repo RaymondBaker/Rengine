@@ -22,12 +22,14 @@ add_library(rengine
 target_include_directories(rengine PUBLIC
                            "include/"
                            )
-target_link_libraries(rengine SDL2 sol2 glm )
+target_link_libraries(rengine SDL2-static sol2 glm lua_static)
 set_property(TARGET rengine PROPERTY CXX_STANDARD 17)
 
 
 
 # add the executable
-add_executable(game game.cpp)
-target_link_libraries(game rengine)
+# TODO check if on windows WIN32
+add_executable(game WIN32 game.cpp)
+target_link_libraries(game rengine SDL2main)
 set_property(TARGET game PROPERTY CXX_STANDARD 17)
+set_property(TARGET game PROPERTY LINK_FLAGS /SUBSYSTEM:CONSOLE)
