@@ -6,7 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+build
 Rengine/x64/Debug
 
 # Visual Studio 2015 cache/options directory
