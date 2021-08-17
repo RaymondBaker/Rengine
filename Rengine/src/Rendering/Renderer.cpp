@@ -19,9 +19,9 @@ namespace Ren {
         SDL_RenderClear(m_renderer);
     }
 
-    void Renderer::draw(SpriteBatch sprite_batch)
+    void Renderer::draw(SpriteBatch &sprite_batch)
     {
-
+        sprite_batch.blit();
     }
 
     void Renderer::present()

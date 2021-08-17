@@ -18,6 +18,7 @@ namespace Ren {
 	public:
 		Event(EventType _type) : type (_type) {
 		}
+		virtual ~Event() {}
 		virtual std::string to_string() const = 0;
 		const EventType type;
 	private:

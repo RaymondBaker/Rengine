@@ -8,6 +8,7 @@ namespace Ren
 {
 	namespace fs = std::filesystem;
 
+	[[maybe_unused]]
 	static std::string read_file(const fs::path& file_path) {
 		std::ifstream t(file_path.c_str());
 
