@@ -21,15 +21,25 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/walterschell/Lua.git
   GIT_TAG        v5.4.2
 )
-
 FetchContent_Declare(
   glm
   GIT_REPOSITORY https://github.com/g-truc/glm.git
   GIT_TAG        0.9.9.8
 )
+FetchContent_Declare(
+  EnTT 
+  GIT_REPOSITORY https://github.com/skypjack/entt.git
+  GIT_TAG        v3.8.1
+)
+FetchContent_Declare(
+  spdlog 
+  GIT_REPOSITORY https://github.com/gabime/spdlog.git
+	GIT_TAG      v1.9.2  
+)
 
-FetchContent_MakeAvailable(SDL2 sol2 glm lua_static)
+FetchContent_MakeAvailable(SDL2 sol2 glm lua_static EnTT spdlog)
 
 
 add_subdirectory(Rengine)
+add_subdirectory(Game)
 

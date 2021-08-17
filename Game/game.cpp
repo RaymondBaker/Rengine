@@ -7,6 +7,10 @@
 #include "Scene/Node.h"
 
 #include <sol/sol.hpp>
+#include <entt/entt.hpp>
+#include <spdlog/spdlog.h>
+
+#include "Components/Components.h"
 
 
 const int screen_width = 600, screen_height = 600;
@@ -19,10 +23,25 @@ int main(int argc, char* args[])
     (void)argc;
     (void)args;
 
-    sol::state lua;
+    sol::state lua{};
 	// open some common libraries
 	lua.open_libraries(sol::lib::base, sol::lib::package);
+
+    
 	lua.script("print('bark bark bark! yeehaw')");
+
+    entt::registry entt_registry;
+    const auto entity = entt_registry.create();
+    entt_registry.emplace<Transform>(entity, glm::vec3{ 1,1,2 }, glm::vec3{ 1,1,3 }, glm::vec3{ 1,1,4 });
+
+
+    auto view = entt_registry.view<const Transform>();
+
+    for (auto [entity, transform] : view.each()) {
+        std::cout << transform.location.x << std::endl;
+    }
+
+    spdlog::info("test");
 
 	std::cout << std::endl;
 
